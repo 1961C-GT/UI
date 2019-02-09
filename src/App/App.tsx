@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import { Icon, Layout, Menu } from "antd";
+import { Icon, Menu } from "antd";
 
 import MapPage from "pages/MapPage";
-import { Logo } from "./styles";
-
-const { Header, Content } = Layout;
+import { Logo, StyledContent, StyledLayout, StyledHeader } from "./styles";
 
 class App extends Component {
   render() {
     return (
-      <Layout className="layout">
-        <Header>
+      <StyledLayout>
+        <StyledHeader>
           <Logo />
           <Menu
-            theme="dark"
             mode="horizontal"
             defaultSelectedKeys={["map"]}
             style={{ lineHeight: "64px" }}
@@ -25,11 +22,11 @@ class App extends Component {
               Settings
             </Menu.Item>
           </Menu>
-        </Header>
-        <Content>
+        </StyledHeader>
+        <StyledContent>
           <MapPage />
-        </Content>
-      </Layout>
+        </StyledContent>
+      </StyledLayout>
     );
   }
 }
