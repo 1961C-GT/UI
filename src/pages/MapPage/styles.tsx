@@ -7,5 +7,4 @@ export const StyledMap = styled(Map)`
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: -1;
 `;

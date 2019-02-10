@@ -11,11 +11,14 @@ export const Logo = styled.div`
 `;
 
 export const StyledLayout = styled(Layout)`
-  background: linear-gradient(rgba(14, 23, 39, 1), rgba(14, 23, 39, 0));
+  background: rgb(14, 23, 39);
+  z-index: -10;
 `;
 
 export const StyledHeader = styled(Layout.Header)`
-  background: rgba(0, 0, 0, 0);
+  background: linear-gradient(rgba(14, 23, 39, 1), rgba(14, 23, 39, 0));
+  z-index: 10;
+
   .ant-menu {
     background: rgba(0, 0, 0, 0);
     border-bottom: 0;
@@ -23,4 +26,9 @@ export const StyledHeader = styled(Layout.Header)`
   }
 `;
 
-export const StyledContent = styled(Layout.Content)``;
+export const StyledContent = styled(Layout.Content)`
+  background: rgb(14, 23, 39);
+  color: white;
+  height: calc(100vh - 64px);
+  z-index: 0;
+`;

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Icon, Menu } from "antd";
 
 import MapPage from "pages/MapPage";
+import DetailsPage from "pages/DetailsPage";
+
 import { Logo, StyledContent, StyledLayout, StyledHeader } from "./styles";
 
 class App extends Component {
@@ -25,6 +27,7 @@ class App extends Component {
         </StyledHeader>
         <StyledContent>
           <MapPage />
+          {/*<DetailsPage />*/}
         </StyledContent>
       </StyledLayout>
     );
