@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/google-maps-react": "^2.0.1",
+    "@types/googlemaps": "^3.30.16",
     "@types/jest": "24.0.0",
     "@types/node": "10.12.24",
     "@types/react": "16.8.2",
@@ -11,7 +11,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.8",
     "antd": "^3.13.2",
-    "google-maps-react": "^2.0.2",
+    "google-maps-react": "ssh://git@github.com:1961C-GT/google-maps-react.git",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router-dom": "^4.3.1",

@@ -931,15 +931,7 @@
     "@svgr/core" "^2.4.1"
     loader-utils "^1.1.0"
 
-"@types/google-maps-react@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@types/google-maps-react/-/google-maps-react-2.0.1.tgz#e4c8a181dd35abedc08fb35cd522e8595d49cc0f"
-  integrity sha512-NGr76/ogkd9emXGIRvIMSRyyNgH/oad/zZmfaw7lOWBg8V9kk0FlUOCrvvPQw7PwF0u/B/Qxd3Bxcs5l/VXvHw==
-  dependencies:
-    "@types/googlemaps" "*"
-    "@types/react" "*"
-
-"@types/googlemaps@*":
+"@types/googlemaps@^3.30.16":
   version "3.30.16"
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.16.tgz#3264d5ef7c3a92fab2a9f00e09e3247866ff3532"
   integrity sha512-6OZ64ahLzYfzuSr71y4jAHZXiwxjvvEM2bfF2tzjIc9KUZVbO30SkYa8WewTsR8aM5BFz/uBiNlZ14eRLXYS0g==
@@ -4516,10 +4508,9 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-google-maps-react@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/google-maps-react/-/google-maps-react-2.0.2.tgz#e03fbba032fe570fb38744bf9cd10b946c591cae"
-  integrity sha512-6cYauGwt22haDUrWxKQ6yoNOqjiuxHo8YYcmb+aBvNICokdXmZOUB6Ah4vD5VexMVlrwP2PFqA/D8sHpEB52KA==
+"google-maps-react@ssh://git@github.com:1961C-GT/google-maps-react.git":
+  version "2.0.3"
+  resolved "ssh://git@github.com:1961C-GT/google-maps-react.git#2d0ef115e3379cc4f0fd65c33cb10acf8516dc93"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"

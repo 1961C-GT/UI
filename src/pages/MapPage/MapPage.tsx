@@ -12,15 +12,22 @@ class MapPage extends Component<{ google: GoogleAPI }> {
         initialCenter={{ lat: 34.2151381, lng: -83.9542486 }}
         zoom={16}
         disableDefaultUI
-        disableDoubleClickZoom
-        draggable={false}
         styles={mapStyles}
-        mapTypeId={google.maps.MapTypeId.HYBRID}
+        backgroundColor={"#001529"}
+        mapTypeId={google.maps.MapTypeId.ROADMAP}
+        mapTypeControl={true}
+        mapTypeControlOptions={{
+          mapTypeIds: [
+            google.maps.MapTypeId.ROADMAP,
+            google.maps.MapTypeId.HYBRID
+          ],
+          position: google.maps.ControlPosition.RIGHT_BOTTOM
+        }}
       />
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyBjzrb6IzOL8FljltCWyZrjluxIaAxveK0"
+  apiKey: process.env.REACT_APP_GAPI_KEY as string
 })(MapPage);
