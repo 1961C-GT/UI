@@ -4510,7 +4510,7 @@ globby@^6.1.0:
 
 "google-maps-react@ssh://git@github.com:1961C-GT/google-maps-react.git":
   version "2.0.3"
-  resolved "ssh://git@github.com:1961C-GT/google-maps-react.git#2d0ef115e3379cc4f0fd65c33cb10acf8516dc93"
+  resolved "ssh://git@github.com:1961C-GT/google-maps-react.git#78e73bc57d6f54b2bbfcdfdab551bc40e9dbe6df"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"

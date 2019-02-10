@@ -956,11 +956,11 @@ export const MapStylesAubergine: google.maps.MapTypeStyle[] = [
 ];
 
 export const MapStyles = {
-  MapStylesStandard,
-  MapStylesSilver,
-  MapStylesRetro,
-  MapStylesDark,
-  MapStylesNight,
-  MapStylesAubergine
+  Standard: MapStylesStandard,
+  Silver: MapStylesSilver,
+  Retro: MapStylesRetro,
+  Dark: MapStylesDark,
+  Night: MapStylesNight,
+  Aubergine: MapStylesAubergine
 };
 export default MapStyles;
