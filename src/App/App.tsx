@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { Icon, Menu } from "antd";
-
-import MapPage from "pages/MapPage";
-import DetailsPage from "pages/DetailsPage";
+import {
+  Link,
+  Route,
+  Switch,
+  RouteComponentProps,
+  withRouter
+} from "react-router-dom";
 
 import { Logo, StyledContent, StyledLayout, StyledHeader } from "./styles";
+import routes from "./routes";
 
-class App extends Component {
+class App extends Component<RouteComponentProps> {
   render() {
     return (
       <StyledLayout>
@@ -14,24 +19,37 @@ class App extends Component {
           <Logo />
           <Menu
             mode="horizontal"
-            defaultSelectedKeys={["map"]}
+            defaultSelectedKeys={[this.props.location.pathname]}
             style={{ lineHeight: "64px" }}
           >
-            <Menu.Item key="map">Map</Menu.Item>
-            <Menu.Item key="details">Details</Menu.Item>
-            <Menu.Item key="settings">
-              <Icon type="setting" />
-              Settings
-            </Menu.Item>
+            {routes.map(
+              route =>
+                route.path && (
+                  <Menu.Item key={route.path}>
+                    <Link to={route.path}>
+                      {route.icon && <Icon type={route.icon} />}
+                      {route.name}
+                    </Link>
+                  </Menu.Item>
+                )
+            )}
           </Menu>
         </StyledHeader>
         <StyledContent>
-          <MapPage />
-          {/*<DetailsPage />*/}
+          <Switch>
+            {routes.map(route => (
+              <Route
+                exact={route.exact}
+                path={route.path}
+                component={route.component}
+                key={`route${route.path}`}
+              />
+            ))}
+          </Switch>
         </StyledContent>
       </StyledLayout>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

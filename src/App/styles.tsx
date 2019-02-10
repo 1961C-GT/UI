@@ -11,18 +11,25 @@ export const Logo = styled.div`
 `;
 
 export const StyledLayout = styled(Layout)`
-  background: rgb(14, 23, 39);
+  background: #001529;
   z-index: -10;
 `;
 
 export const StyledHeader = styled(Layout.Header)`
-  background: linear-gradient(rgba(14, 23, 39, 1), rgba(14, 23, 39, 0));
+  background: linear-gradient(#001529ff, #00152900);
   z-index: 10;
 
   .ant-menu {
     background: rgba(0, 0, 0, 0);
     border-bottom: 0;
+  }
+
+  .ant-menu-item > a {
     color: white;
+  }
+
+  .ant-menu-item-selected > a {
+    color: #1890ff;
   }
 `;
 
