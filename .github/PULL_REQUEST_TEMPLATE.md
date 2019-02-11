@@ -1,4 +1,4 @@
-Fixes # .
+fixes #
 
-Changes proposed in this pull request:
-- 
+High-level changes:
+- ...
