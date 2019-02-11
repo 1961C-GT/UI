@@ -9,7 +9,11 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import appReducer from "./App/reducer";
 
-const store = createStore(appReducer);
+const store = createStore(
+  appReducer,
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+);
 const MOUNT_NODE = document.getElementById("root") as Element;
 
 const render = () => {
