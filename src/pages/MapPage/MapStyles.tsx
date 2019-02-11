@@ -1,3 +1,5 @@
+import { IMapStyles, CustomMapType } from "./types";
+
 export const MapStylesStandard: google.maps.MapTypeStyle[] = [];
 export const MapStylesSilver: google.maps.MapTypeStyle[] = [
   {
@@ -955,12 +957,12 @@ export const MapStylesAubergine: google.maps.MapTypeStyle[] = [
   }
 ];
 
-export const MapStyles = {
-  Standard: MapStylesStandard,
-  Silver: MapStylesSilver,
-  Retro: MapStylesRetro,
-  Dark: MapStylesDark,
-  Night: MapStylesNight,
-  Aubergine: MapStylesAubergine
+export const MapStyles: IMapStyles = {
+  [CustomMapType.STANDARD]: MapStylesStandard,
+  [CustomMapType.SILVER]: MapStylesSilver,
+  [CustomMapType.RETRO]: MapStylesRetro,
+  [CustomMapType.DARK]: MapStylesDark,
+  [CustomMapType.NIGHT]: MapStylesNight,
+  [CustomMapType.AUBERGINE]: MapStylesAubergine
 };
 export default MapStyles;
