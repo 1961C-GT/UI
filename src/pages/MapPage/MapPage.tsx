@@ -38,7 +38,7 @@ const MapPage: React.FC<Props> = props => (
           new props.google.maps.StyledMapType(mapStyle, { name })
         )
       );
-      map!.setMapTypeId("Aubergine");
+      map!.setMapTypeId(props.mapType);
     }}
     onMaptypeidChanged={(mapProps, map) => {
       console.log(`MapTypeId: ${map!.getMapTypeId()}`);
