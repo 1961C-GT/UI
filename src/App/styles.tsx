@@ -34,8 +34,11 @@ export const StyledHeader = styled(Layout.Header)`
 `;
 
 export const StyledContent = styled(Layout.Content)`
-  background: rgb(14, 23, 39);
-  color: white;
-  height: calc(100vh - 64px);
+  background: white;
+  border-radius: 5px;
+  color: black;
+  height: calc(100vh - 64px - 50px);
+  margin: 25px;
+  padding: 25px;
   z-index: 0;
 `;
