@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import { Collapse } from "antd";
+import { PanelHeader, HeaderName, HeaderType } from "./styles";
 
 class DetailsPage extends Component {
   render() {
@@ -36,19 +37,34 @@ class DetailsPage extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
           return (
-            <Collapse accordion>
+            <Collapse bordered={false}>
               {data.nodes.map((node: any) => (
-                <Collapse.Panel header={node.name} key={node.id}>
-                  <p>Type: {node.type}</p>
+                <Collapse.Panel
+                  header={
+                    <PanelHeader>
+                      <HeaderName>{node.name}</HeaderName>
+                      <HeaderType>{node.type}</HeaderType>
+                    </PanelHeader>
+                  }
+                  key={node.id}
+                >
                   <p>
                     Location: ({node.pose.position.lat},{" "}
                     {node.pose.position.lon})
                   </p>
-                  <p>
-                    Orientation: {node.pose.orientation.heading} (source:{" "}
-                    {node.pose.orientation.source})
-                  </p>
-                  <p>Speed: {node.telemetry.groundSpeed} knots?</p>
+                  {node.type === "MOBILE" && (
+                    <div>
+                      <p>
+                        Orientation:{" "}
+                        {Number(node.pose.orientation.heading).toFixed(2)}º
+                        (source: {node.pose.orientation.source})
+                      </p>
+                      <p>
+                        Speed: {Number(node.telemetry.groundSpeed).toFixed(2)}{" "}
+                        knots
+                      </p>
+                    </div>
+                  )}
                 </Collapse.Panel>
               ))}
             </Collapse>
