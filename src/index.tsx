@@ -1,13 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+
 import { createStore } from "redux";
+import { Provider as ReduxProvider } from "react-redux";
+
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 
 import "./index.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import appReducer from "./App/reducer";
+
+import * as serviceWorker from "./serviceWorker";
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000"
+});
 
 const store = createStore(
   appReducer,
@@ -18,11 +28,13 @@ const MOUNT_NODE = document.getElementById("root") as Element;
 
 const render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
+    <ApolloProvider client={client}>
+      <ReduxProvider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReduxProvider>
+    </ApolloProvider>,
     MOUNT_NODE
   );
 };
