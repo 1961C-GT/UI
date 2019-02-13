@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { Layout } from "antd";
 
 export const Logo = styled.div`
-  width: 47px;
-  height: 47px;
-  background-image: url("/logo.png");
+  width: 72px;
+  height: 72px;
+  background-image: url(/logo-bw-small.png);
   background-size: contain;
-  margin: 8px 50px 8px 0;
+  margin: 8px 16px 0 0;
   float: left;
 `;
 
@@ -41,4 +41,29 @@ export const StyledContent = styled(Layout.Content)`
   margin: 25px;
   padding: 25px;
   z-index: 0;
+
+  // ::after {
+  //   content: "";
+  //   background-image: url(/logo-bw-large.png);
+  //   background-position: center;
+  //   background-repeat: no-repeat;
+  //   background-size: contain;
+  //   opacity: 0.05;
+  //   top: 64px;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   position: absolute;
+  //   margin: 64px;
+  //   margin-top: 256px;
+  //   z-index: -1;
+  // }
+
+  .ant-collapse {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .ant-collapse-item {
+    border: 0;
+  }
 `;

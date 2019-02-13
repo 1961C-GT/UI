@@ -42,7 +42,7 @@ class DetailsPage extends Component {
                 <Collapse.Panel
                   header={
                     <PanelHeader>
-                      <HeaderName>{node.name}</HeaderName>
+                      <HeaderName>Node {node.id}</HeaderName>
                       <HeaderType>{node.type}</HeaderType>
                     </PanelHeader>
                   }
