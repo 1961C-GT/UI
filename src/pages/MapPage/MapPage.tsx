@@ -27,9 +27,9 @@ const MapPage: React.FC<IProps> = props => (
   // We don't need the full nodeDetailsQuery here, but doing a smaller
   // query runs into this problem:
   // https://github.com/apollographql/react-apollo/issues/2114
+  // TODO: Move query inside map, so query errors don't make map disappear?
   <Query query={nodeDetailsQuery} partialRefetch>
     {({ loading, error, data }) => {
-      if (loading || error) return null;
       return (
         <StyledMap
           google={props.google}
@@ -56,15 +56,17 @@ const MapPage: React.FC<IProps> = props => (
             props.dispatch(setMapType(map!.getMapTypeId() as CustomMapType));
           }}
         >
-          {data.nodes.map((node: any) => (
-            <Marker
-              key={node.id}
-              position={{
-                lat: node.pose.position.lat,
-                lng: node.pose.position.lon
-              }}
-            />
-          ))}
+          {loading || error
+            ? null
+            : data.nodes.map((node: any) => (
+                <Marker
+                  key={node.id}
+                  position={{
+                    lat: node.pose.position.lat,
+                    lng: node.pose.position.lon
+                  }}
+                />
+              ))}
         </StyledMap>
       );
     }}
