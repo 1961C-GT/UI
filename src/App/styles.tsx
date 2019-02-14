@@ -1,20 +1,6 @@
 import styled from "styled-components";
 import { Card } from "antd";
 
-export const Logo = styled.div`
-  // Layout
-  flex: 0 0 auto;
-  z-index: 10;
-  // Box Model
-  width: 128px;
-  height: 128px;
-  // Visual
-  background-image: url(/logo-bw-small.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-`;
-
 export const AppContainer = styled.div`
   // Layout
   position: absolute;
@@ -40,6 +26,19 @@ export const AppContainer = styled.div`
   }
 `;
 
+export const Logo = styled.div`
+  // Layout
+  z-index: 10;
+  // Box Model
+  width: 128px;
+  height: 128px;
+  // Visual
+  background-image: url(/logo-bw-small.png);
+  background-size: contain;
+  // Misc
+  pointer-events: none;
+`;
+
 export const ContentPane = styled(Card)`
   // Layout
   flex: 0 0 30%;
@@ -51,4 +50,14 @@ export const ContentPane = styled(Card)`
   background-color: rgba(255, 255, 255, 0.95);
   // Misc
   overflow: scroll;
+`;
+
+export const ContentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  padding-top: 0;
+  padding-right: 8px;
+  font-size: 24px;
 `;

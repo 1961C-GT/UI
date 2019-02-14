@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import * as React from "react";
 
-import { Logo, ContentPane, AppContainer } from "./styles";
-import MapPage from "../pages/MapPage/MapPage";
-import DetailsPage from "../pages/DetailsPage/DetailsPage";
+import MapPage from "pages/MapPage/MapPage";
+import DetailsPage from "pages/DetailsPage/DetailsPage";
 
-class App extends Component<RouteComponentProps> {
-  render() {
-    return (
-      <AppContainer>
-        <Logo />
-        <MapPage />
-        <ContentPane>
-          <DetailsPage />
-        </ContentPane>
-      </AppContainer>
-    );
-  }
-}
+import { AppContainer, ContentHeader, ContentPane, Logo } from "./styles";
+import { Icon } from "antd";
 
-export default withRouter(App);
+export const App: React.FC = () => (
+  <AppContainer>
+    <Logo />
+    <MapPage />
+    <ContentPane>
+      <ContentHeader>
+        <div>Details</div>
+        <Icon type="setting" />
+      </ContentHeader>
+      <DetailsPage />
+    </ContentPane>
+  </AppContainer>
+);
+
+export default App;

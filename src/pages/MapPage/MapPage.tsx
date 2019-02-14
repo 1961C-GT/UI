@@ -33,7 +33,7 @@ const MapPage: React.FC<IProps> = props => (
       return (
         <StyledMap
           google={props.google}
-          initialCenter={{ lat: 34.2112456, lng: -83.9658699 }}
+          initialCenter={{ lat: 34.2162456, lng: -83.9558699 }}
           zoom={16}
           disableDefaultUI
           backgroundColor={"transparent"}
