@@ -5,7 +5,7 @@ import { CustomMapType } from "pages/MapPage/types";
 
 const themeInitialState: ITheme = {
   themeType: ThemeType.DARK,
-  mapType: CustomMapType.AUBERGINE
+  mapType: CustomMapType.DARK
 };
 
 const theme = (state: ITheme = themeInitialState, action: IThemeAction) => {

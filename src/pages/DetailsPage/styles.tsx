@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Collapse } from "antd";
 
 export const PanelHeader = styled.div`
   display: flex;
@@ -9,4 +10,8 @@ export const HeaderName = styled.div`
 `;
 export const HeaderType = styled.div`
   flex: 0;
+`;
+
+export const StyledCollapse = styled(Collapse)`
+  background: transparent;
 `;

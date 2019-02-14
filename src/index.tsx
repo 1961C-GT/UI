@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { BrowserRouter } from "react-router-dom";
-
 import { createStore } from "redux";
-import { Provider as ReduxProvider } from "react-redux";
-
 import ApolloClient from "apollo-boost";
+
+import { Provider as ReduxProvider } from "react-redux";
 import { ApolloProvider } from "react-apollo";
+import { ThemeProvider } from "styled-components";
 
 import "./index.css";
 import App from "./App";
@@ -24,6 +23,11 @@ const store = createStore(
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+const theme = {
+  background: "#000000"
+};
+
 const MOUNT_NODE = document.getElementById("root") as Element;
 
 const render = () => {
@@ -31,7 +35,9 @@ const render = () => {
     <ApolloProvider client={client}>
       <ReduxProvider store={store}>
         <BrowserRouter>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </BrowserRouter>
       </ReduxProvider>
     </ApolloProvider>,

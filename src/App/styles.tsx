@@ -1,69 +1,54 @@
 import styled from "styled-components";
-import { Layout } from "antd";
+import { Card } from "antd";
 
 export const Logo = styled.div`
-  width: 72px;
-  height: 72px;
-  background-image: url(/logo-bw-small.png);
-  background-size: contain;
-  margin: 8px 16px 0 0;
-  float: left;
-`;
-
-export const StyledLayout = styled(Layout)`
-  background: #001529;
-  z-index: -10;
-`;
-
-export const StyledHeader = styled(Layout.Header)`
-  background: linear-gradient(#001529ff, #00152900);
+  // Layout
+  flex: 0 0 auto;
   z-index: 10;
+  // Box Model
+  width: 128px;
+  height: 128px;
+  // Visual
+  background-image: url(/logo-bw-small.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+`;
 
-  .ant-menu {
-    background: rgba(0, 0, 0, 0);
-    border-bottom: 0;
-  }
+export const AppContainer = styled.div`
+  // Layout
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  justify-content: space-between;
+  // Box Model
+  padding: 24px;
 
-  .ant-menu-item > a {
-    color: white;
-  }
-
-  .ant-menu-item-selected > a {
-    color: #1890ff;
+  ::before {
+    // Layout
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    // Visual
+    background: ${props => props.theme.background};
+    content: "";
   }
 `;
 
-export const StyledContent = styled(Layout.Content)`
-  background: white;
-  border-radius: 5px;
-  color: black;
-  height: calc(100vh - 64px - 50px);
-  margin: 25px;
-  padding: 25px;
-  z-index: 0;
-
-  // ::after {
-  //   content: "";
-  //   background-image: url(/logo-bw-large.png);
-  //   background-position: center;
-  //   background-repeat: no-repeat;
-  //   background-size: contain;
-  //   opacity: 0.05;
-  //   top: 64px;
-  //   left: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   position: absolute;
-  //   margin: 64px;
-  //   margin-top: 256px;
-  //   z-index: -1;
-  // }
-
-  .ant-collapse {
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  .ant-collapse-item {
-    border: 0;
-  }
+export const ContentPane = styled(Card)`
+  // Layout
+  flex: 0 0 30%;
+  z-index: 10;
+  // Box Model
+  height: fit-content;
+  max-height: 100%;
+  // Visual
+  background-color: rgba(255, 255, 255, 0.95);
+  // Misc
+  overflow: scroll;
 `;

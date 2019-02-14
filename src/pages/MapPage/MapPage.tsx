@@ -11,9 +11,9 @@ import { CustomMapType } from "./types";
 import { setMapType } from "App/actions";
 
 import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import { nodeDetailsQuery } from "../DetailsPage/queries";
 
-type Props = {
+type IProps = {
   google: GoogleAPI;
   mapType: MapType;
   dispatch: any; // TODO: Figure out proper type for this
@@ -22,32 +22,22 @@ type Props = {
 // TODO: Implement bindActionCreators
 // onSetMapType: (mapTypeId: string | google.maps.MapTypeId) => any;
 
-const MapPage: React.FC<Props> = props => (
-  <Query
-    query={gql`
-      query {
-        nodes {
-          id
-          pose {
-            position {
-              lat
-              lon
-            }
-          }
-        }
-      }
-    `}
-  >
+const MapPage: React.FC<IProps> = props => (
+  // TODO: Optimize query
+  // We don't need the full nodeDetailsQuery here, but doing a smaller
+  // query runs into this problem:
+  // https://github.com/apollographql/react-apollo/issues/2114
+  <Query query={nodeDetailsQuery} partialRefetch>
     {({ loading, error, data }) => {
       if (loading || error) return null;
       return (
         <StyledMap
           google={props.google}
-          initialCenter={{ lat: 34.2151381, lng: -83.9542486 }}
+          initialCenter={{ lat: 34.2112456, lng: -83.9658699 }}
           zoom={16}
           disableDefaultUI
-          backgroundColor={"#001529"}
-          mapTypeControl={true}
+          backgroundColor={"transparent"}
+          mapTypeControl={false}
           mapTypeControlOptions={{
             mapTypeIds: Object.keys(MapStyles),
             position: props.google.maps.ControlPosition.RIGHT_BOTTOM
