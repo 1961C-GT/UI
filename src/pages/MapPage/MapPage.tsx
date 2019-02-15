@@ -1,25 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
+import { Query } from "react-apollo";
 import { GoogleAPI, GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
+import { nodeDetailsQuery } from "pages/DetailsPage";
+
 import MapStyles from "./MapStyles";
-
-import { IState, MapType } from "App/types";
 import { CustomMapType } from "./types";
-
-import { setMapType } from "App/actions";
-
-import { Query } from "react-apollo";
-import { nodeDetailsQuery } from "pages/DetailsPage/queries";
 
 type IProps = {
   google: GoogleAPI;
-  mapType: MapType;
-  dispatch: any; // TODO: Figure out proper type for this
 };
-
-// TODO: Implement bindActionCreators
-// onSetMapType: (mapTypeId: string | google.maps.MapTypeId) => any;
 
 const MapPage: React.FC<IProps> = props => (
   // TODO: Optimize query
@@ -48,11 +38,10 @@ const MapPage: React.FC<IProps> = props => (
                 new props.google.maps.StyledMapType(mapStyle, { name })
               )
             );
-            map!.setMapTypeId(props.mapType);
+            map!.setMapTypeId(CustomMapType.DARK);
           }}
           onMaptypeidChanged={(mapProps, map) => {
             console.log(`MapTypeId: ${map!.getMapTypeId()}`);
-            props.dispatch(setMapType(map!.getMapTypeId() as CustomMapType));
           }}
         >
           {loading || error
@@ -72,10 +61,6 @@ const MapPage: React.FC<IProps> = props => (
   </Query>
 );
 
-const mapStateToProps = (state: IState) => ({
-  mapType: state.theme.mapType
-});
-
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GAPI_KEY as string
-})(connect(mapStateToProps)(MapPage));
+})(MapPage);

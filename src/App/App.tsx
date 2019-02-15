@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import MapPage from "pages/MapPage/MapPage";
-import MapStyles from "pages/MapPage/MapStyles";
-import { CustomMapType } from "pages/MapPage/types";
-import DetailsPage from "pages/DetailsPage/DetailsPage";
+import MapPage, { MapStyles, CustomMapType } from "pages/MapPage";
+import DetailsPage from "pages/DetailsPage";
 
+import { Icon, Select, Switch } from "antd";
 import {
   AppContainer,
   ContentHeader,
@@ -16,7 +15,6 @@ import {
   SettingsItem,
   SettingsLabel
 } from "./styles";
-import { Icon, Select, Switch } from "antd";
 
 type Props = {};
 
