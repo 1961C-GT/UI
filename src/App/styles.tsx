@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "antd";
+import { Card, Drawer } from "antd";
 
 export const AppContainer = styled.div`
   // Layout
@@ -44,7 +44,7 @@ export const Logo = styled.div`
 
 export const MapPane = styled.div`
   position: absolute;
-  height: 100vw;
+  height: 62%;
   width: 100vw;
   @media only screen and (orientation: landscape) {
     height: 100vh;
@@ -54,7 +54,7 @@ export const MapPane = styled.div`
 export const ContentPane = styled(Card)`
   // Layout
   position: absolute;
-  top: 100vw;
+  top: 62%;
   bottom: 0;
   width: 100vw;
   z-index: 10;
@@ -75,19 +75,31 @@ export const ContentPane = styled(Card)`
 `;
 
 export const ContentHeader = styled.div`
+  // Layout
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  padding-top: 0;
-  padding-right: 8px;
+  // Box Model
+  padding: 0 8px 16px 16px;
+  // Visual
   font-size: 24px;
 `;
 
+export const ResponsiveDrawer = styled(Drawer)`
+  .ant-drawer-content-wrapper {
+    width: 90% !important;
+    @media only screen and (orientation: landscape) {
+      width: 38% !important;
+    }
+  }
+`;
+
 export const SettingsItem = styled.div`
+  // Layout
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // Box Model
   padding: 12px;
 `;
 
@@ -96,5 +108,6 @@ export const SettingsLabel = styled.div`
 `;
 
 export const SettingsDescription = styled.div`
+  padding-right: 16px;
   font-size: 12px;
 `;

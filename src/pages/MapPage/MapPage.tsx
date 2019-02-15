@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { GoogleAPI, GoogleApiWrapper, Marker } from "google-maps-react";
+import { GoogleAPI, GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
 import MapStyles from "./MapStyles";
-import { StyledMap } from "./styles";
 
 import { IState, MapType } from "App/types";
 import { CustomMapType } from "./types";
@@ -11,7 +10,7 @@ import { CustomMapType } from "./types";
 import { setMapType } from "App/actions";
 
 import { Query } from "react-apollo";
-import { nodeDetailsQuery } from "../DetailsPage/queries";
+import { nodeDetailsQuery } from "pages/DetailsPage/queries";
 
 type IProps = {
   google: GoogleAPI;
@@ -31,7 +30,7 @@ const MapPage: React.FC<IProps> = props => (
   <Query query={nodeDetailsQuery} partialRefetch>
     {({ loading, error, data }) => {
       return (
-        <StyledMap
+        <Map
           google={props.google}
           initialCenter={{ lat: 34.2162456, lng: -83.9558699 }}
           zoom={16}
@@ -67,7 +66,7 @@ const MapPage: React.FC<IProps> = props => (
                   }}
                 />
               ))}
-        </StyledMap>
+        </Map>
       );
     }}
   </Query>

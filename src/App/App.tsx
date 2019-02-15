@@ -11,12 +11,12 @@ import {
   ContentPane,
   Logo,
   MapPane,
+  ResponsiveDrawer,
   SettingsDescription,
   SettingsItem,
   SettingsLabel
 } from "./styles";
 import { Icon, Select, Switch } from "antd";
-import { Drawer } from "antd/es";
 
 type Props = {};
 
@@ -51,9 +51,8 @@ export class App extends React.Component<Props, State> {
           </ContentHeader>
           <DetailsPage />
         </ContentPane>
-        <Drawer
+        <ResponsiveDrawer
           title="Settings"
-          width={"100%"}
           onClose={this.handleSettingsClose}
           visible={this.state.settingsOpen}
         >
@@ -92,7 +91,7 @@ export class App extends React.Component<Props, State> {
               <Switch defaultChecked />
             </SettingsItem>
           ))}
-        </Drawer>
+        </ResponsiveDrawer>
       </AppContainer>
     );
   }
