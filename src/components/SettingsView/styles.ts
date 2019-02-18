@@ -3,7 +3,7 @@ import { Drawer } from "antd";
 
 export const ResponsiveDrawer = styled(Drawer)`
   .ant-drawer-content-wrapper {
-    width: 90% !important;
+    width: calc(100% - 64px) !important;
 
     @media only screen and (orientation: landscape) {
       width: 38% !important;
