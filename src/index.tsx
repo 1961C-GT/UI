@@ -9,7 +9,7 @@ import { ThemeProvider } from "styled-components";
 
 import "./index.css";
 import apolloConfig from "./apolloConfig";
-import App from "./App";
+import App from "./App/index";
 import Themes from "./App/themes";
 
 import * as serviceWorker from "./serviceWorker";
