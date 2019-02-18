@@ -1,9 +1,9 @@
 import * as React from "react";
+import { Icon, Select, Switch } from "antd";
 
-import MapPage, { MapStyles, CustomMapType } from "pages/MapPage";
+import MapPage from "pages/MapPage";
 import DetailsPage from "pages/DetailsPage";
 
-import { Icon, Select, Switch } from "antd";
 import {
   AppContainer,
   ContentHeader,
@@ -15,15 +15,11 @@ import {
   SettingsItem,
   SettingsLabel
 } from "./styles";
+import Themes from "./themes";
+import { IProps, IState, ThemeType } from "./types";
 
-type Props = {};
-
-type State = {
-  settingsOpen: boolean;
-};
-
-export class App extends React.Component<Props, State> {
-  readonly state: State = {
+export class App extends React.Component<IProps, IState> {
+  readonly state: IState = {
     settingsOpen: false
   };
 
@@ -61,10 +57,10 @@ export class App extends React.Component<Props, State> {
                 Changes the look of the app.
               </SettingsDescription>
             </div>
-            <Select defaultValue={CustomMapType.DARK} style={{ width: "96px" }}>
-              {Object.keys(MapStyles).map(style => (
-                <Select.Option key={style} value={style}>
-                  {style}
+            <Select defaultValue={ThemeType.DARK} style={{ width: "128px" }}>
+              {Object.keys(Themes).map(theme => (
+                <Select.Option key={theme} value={theme}>
+                  {theme}
                 </Select.Option>
               ))}
             </Select>
@@ -78,17 +74,6 @@ export class App extends React.Component<Props, State> {
             </div>
             <Switch defaultChecked />
           </SettingsItem>
-          {[1, 2, 3].map(num => (
-            <SettingsItem key={num}>
-              <div>
-                <SettingsLabel>Example setting {num}</SettingsLabel>
-                <SettingsDescription>
-                  Makes number {num}, along with its friends, appear on the map.
-                </SettingsDescription>
-              </div>
-              <Switch defaultChecked />
-            </SettingsItem>
-          ))}
         </ResponsiveDrawer>
       </AppContainer>
     );

@@ -1,10 +1,16 @@
+export interface IProps {}
+
+export interface IState {
+  settingsOpen: boolean;
+}
+
 export enum ThemeType {
-  STANDARD,
-  SILVER,
-  RETRO,
-  DARK,
-  NIGHT,
-  AUBERGINE
+  STANDARD = "Standard",
+  SILVER = "Silver",
+  RETRO = "Retro",
+  DARK = "Dark",
+  NIGHT = "Night",
+  AUBERGINE = "Aubergine"
 }
 
 export interface ITheme {
@@ -13,5 +19,5 @@ export interface ITheme {
 }
 
 export interface IThemes {
-  [type: number]: ITheme; // number should be ThemeType, but TS doesn't allow...
+  [type: string]: ITheme; // string should be ThemeType, but TS doesn't allow...
 }

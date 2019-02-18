@@ -984,17 +984,17 @@ let Themes: IThemes = {
   }
 };
 
-for (const themeType in Object.keys(Themes)) {
-  if (Themes[themeType].appStyles.background) continue;
+Object.keys(Themes).forEach(themeType => {
+  if (Themes[themeType].appStyles.background) return;
   const waterStyle = Themes[themeType].mapStyles.find(
     style => style.featureType == "water" && style.elementType == "geometry"
   );
-  if (!waterStyle || !waterStyle.stylers) continue;
+  if (!waterStyle || !waterStyle.stylers) return;
   const waterColorStyler = waterStyle.stylers.find(
     styler => styler.color != undefined
   );
-  if (!waterColorStyler) continue;
+  if (!waterColorStyler) return;
   Themes[themeType].appStyles.background = waterColorStyler.color;
-}
+});
 
 export default Themes;
