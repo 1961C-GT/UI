@@ -3,30 +3,42 @@ import ReactDOM from "react-dom";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import gql from "graphql-tag";
 
 import { ThemeProvider } from "styled-components";
 
 import "./index.css";
+import apolloConfig from "./apolloConfig";
 import App from "./App";
+import Themes from "./App/themes";
 
 import * as serviceWorker from "./serviceWorker";
+import Query from "react-apollo/Query";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4000"
-});
+const client = new ApolloClient(apolloConfig);
 
-const theme = {
-  background: "#000000"
-};
+const themeQuery = gql`
+  {
+    settings @client {
+      theme
+    }
+  }
+`;
 
 const MOUNT_NODE = document.getElementById("root") as Element;
 
 const render = () => {
   ReactDOM.render(
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <Query query={themeQuery}>
+        {({ loading, data }) =>
+          loading ? null : (
+            <ThemeProvider theme={Themes[data.settings.theme].appStyles}>
+              <App />
+            </ThemeProvider>
+          )
+        }
+      </Query>
     </ApolloProvider>,
     MOUNT_NODE
   );
