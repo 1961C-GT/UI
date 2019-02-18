@@ -1,9 +1,11 @@
 import * as React from "react";
+import { Query } from "react-apollo";
 import { Select, Switch } from "antd";
 
 import Themes from "App/themes";
 import { ThemeType } from "App/types";
 
+import { settingsQuery } from "./queries";
 import {
   ResponsiveDrawer,
   SettingsDescription,
@@ -23,13 +25,27 @@ const SettingsView: React.FC<IProps> = props => (
         <SettingsLabel>Theme</SettingsLabel>
         <SettingsDescription>Changes the look of the app.</SettingsDescription>
       </div>
-      <Select defaultValue={ThemeType.DARK} style={{ width: "128px" }}>
-        {Object.keys(Themes).map(theme => (
-          <Select.Option key={theme} value={theme}>
-            {theme}
-          </Select.Option>
-        ))}
-      </Select>
+      <Query query={settingsQuery}>
+        {({ loading, data, client }) =>
+          loading ? null : (
+            <Select
+              defaultValue={data.settings.theme}
+              style={{ width: "128px" }}
+              onSelect={theme =>
+                client.writeData({
+                  data: { settings: { __typename: "Settings", theme } }
+                })
+              }
+            >
+              {Object.keys(Themes).map(theme => (
+                <Select.Option key={theme} value={theme}>
+                  {theme}
+                </Select.Option>
+              ))}
+            </Select>
+          )
+        }
+      </Query>
     </SettingsItem>
     <SettingsItem>
       <div>
