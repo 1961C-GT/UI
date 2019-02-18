@@ -1,22 +1,18 @@
 import * as React from "react";
-import { Icon, Select, Switch } from "antd";
+import { Icon } from "antd";
 
-import MapView from "components/MapView/index";
 import DetailsView from "components/DetailsView/index";
+import MapView from "components/MapView/index";
+import SettingsView from "components/SettingsView/SettingsView";
 
 import {
   AppContainer,
   ContentHeader,
   ContentPane,
   Logo,
-  MapPane,
-  ResponsiveDrawer,
-  SettingsDescription,
-  SettingsItem,
-  SettingsLabel
+  MapPane
 } from "./styles";
-import Themes from "./themes";
-import { IProps, IState, ThemeType } from "./types";
+import { IProps, IState } from "./types";
 
 class App extends React.Component<IProps, IState> {
   readonly state: IState = {
@@ -40,36 +36,10 @@ class App extends React.Component<IProps, IState> {
           </ContentHeader>
           <DetailsView />
         </ContentPane>
-        <ResponsiveDrawer
-          title="Settings"
-          onClose={this.handleSettingsClose}
-          visible={this.state.settingsOpen}
-        >
-          <SettingsItem>
-            <div>
-              <SettingsLabel>Theme</SettingsLabel>
-              <SettingsDescription>
-                Changes the look of the app.
-              </SettingsDescription>
-            </div>
-            <Select defaultValue={ThemeType.DARK} style={{ width: "128px" }}>
-              {Object.keys(Themes).map(theme => (
-                <Select.Option key={theme} value={theme}>
-                  {theme}
-                </Select.Option>
-              ))}
-            </Select>
-          </SettingsItem>
-          <SettingsItem>
-            <div>
-              <SettingsLabel>Show all nodes</SettingsLabel>
-              <SettingsDescription>
-                Displays base/fixed nodes on the map.
-              </SettingsDescription>
-            </div>
-            <Switch defaultChecked />
-          </SettingsItem>
-        </ResponsiveDrawer>
+        <SettingsView
+          settingsOpen={this.state.settingsOpen}
+          onSettingsClose={this.handleSettingsClose}
+        />
       </AppContainer>
     );
   }

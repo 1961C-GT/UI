@@ -8,7 +8,7 @@ import { detailsViewQuery } from "components/DetailsView/queries";
 import { settingsQuery } from "./queries";
 import { IProps } from "./types";
 
-const MapPage: React.FC<IProps> = props => (
+const MapView: React.FC<IProps> = props => (
   <Query query={settingsQuery}>
     {({ loading, data }) =>
       loading ? null : (
@@ -52,4 +52,4 @@ const MapPage: React.FC<IProps> = props => (
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GAPI_KEY as string
-})(MapPage);
+})(MapView);
