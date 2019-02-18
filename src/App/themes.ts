@@ -959,7 +959,7 @@ const MapStylesAubergine: google.maps.MapTypeStyle[] = [
 
 let Themes: IThemes = {
   [ThemeType.STANDARD]: {
-    appStyles: {},
+    appStyles: { background: "#aad9fd" },
     mapStyles: MapStylesStandard
   },
   [ThemeType.SILVER]: {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card, Drawer } from "antd";
+import { Card } from "antd";
 
 export const AppContainer = styled.div`
   position: absolute;
@@ -25,13 +25,15 @@ export const Logo = styled.div`
   width: 64px;
   height: 64px;
   margin: 24px;
-  background-image: url(/logo-bw-large.png);
+  background-image: url(/logo-bw-small.png);
   background-size: contain;
+  opacity: 0.75;
   pointer-events: none;
 
   @media only screen and (orientation: landscape) {
     width: 192px;
     height: 192px;
+    background-image: url(/logo-bw-large.png);
   }
 `;
 
@@ -70,30 +72,4 @@ export const ContentHeader = styled.div`
   align-items: center;
   padding: 0 8px 16px 16px;
   font-size: 24px;
-`;
-
-export const ResponsiveDrawer = styled(Drawer)`
-  .ant-drawer-content-wrapper {
-    width: 90% !important;
-
-    @media only screen and (orientation: landscape) {
-      width: 38% !important;
-    }
-  }
-`;
-
-export const SettingsItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-`;
-
-export const SettingsLabel = styled.div`
-  font-size: 16px;
-`;
-
-export const SettingsDescription = styled.div`
-  padding-right: 16px;
-  font-size: 12px;
 `;
