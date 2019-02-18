@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const nodeDetailsQuery = gql`
+export const detailsViewQuery = gql`
   query {
     nodes {
       id

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Icon, Select, Switch } from "antd";
 
-import MapPage from "pages/MapPage";
-import DetailsPage from "pages/DetailsPage";
+import MapView from "components/MapView/index";
+import DetailsView from "components/DetailsView/index";
 
 import {
   AppContainer,
@@ -18,32 +18,27 @@ import {
 import Themes from "./themes";
 import { IProps, IState, ThemeType } from "./types";
 
-export class App extends React.Component<IProps, IState> {
+class App extends React.Component<IProps, IState> {
   readonly state: IState = {
     settingsOpen: false
   };
 
-  handleSettingsOpen = () => {
-    this.setState({ settingsOpen: true });
-  };
-
-  handleSettingsClose = () => {
-    this.setState({ settingsOpen: false });
-  };
+  handleSettingsOpen = () => this.setState({ settingsOpen: true });
+  handleSettingsClose = () => this.setState({ settingsOpen: false });
 
   render() {
     return (
       <AppContainer>
         <Logo />
         <MapPane>
-          <MapPage />
+          <MapView />
         </MapPane>
         <ContentPane>
           <ContentHeader>
             <div>Details</div>
             <Icon type="setting" onClick={this.handleSettingsOpen} />
           </ContentHeader>
-          <DetailsPage />
+          <DetailsView />
         </ContentPane>
         <ResponsiveDrawer
           title="Settings"

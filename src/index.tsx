@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import { ThemeProvider } from "styled-components";
@@ -13,7 +13,6 @@ import App from "./App";
 import Themes from "./App/themes";
 
 import * as serviceWorker from "./serviceWorker";
-import Query from "react-apollo/Query";
 
 const client = new ApolloClient(apolloConfig);
 
