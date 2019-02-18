@@ -10,30 +10,30 @@ import { IProps } from "./types";
 
 const MapView: React.FC<IProps> = props => (
   <Query query={settingsQuery}>
-    {({ loading, data }) =>
+    {({ loading, data: settingsData }) =>
       loading ? null : (
-        <Map
-          google={props.google}
-          initialCenter={{ lat: 34.2162456, lng: -83.9558699 }}
-          zoom={16}
-          disableDefaultUI
-          backgroundColor={"transparent"}
-          onReady={(mapProps, map) => {
-            map!.mapTypes.set(
-              data.settings.theme,
-              new props.google.maps.StyledMapType(
-                Themes[data.settings.theme].mapStyles,
-                { name: data.settings.theme }
-              )
-            );
-            map!.setMapTypeId(data.settings.theme);
-          }}
-        >
-          <Query query={detailsViewQuery /* TODO: implement mapViewQuery */}>
-            {({ loading, error, data }) =>
-              loading || error
+        <Query query={detailsViewQuery /* TODO: implement mapViewQuery */}>
+          {({ loading, error, data: nodesData }) => (
+            <Map
+              google={props.google}
+              initialCenter={{ lat: 34.2162456, lng: -83.9558699 }}
+              zoom={16}
+              disableDefaultUI
+              backgroundColor={"transparent"}
+              onReady={(mapProps, map) => {
+                map!.mapTypes.set(
+                  settingsData.settings.theme,
+                  new props.google.maps.StyledMapType(
+                    Themes[settingsData.settings.theme].mapStyles,
+                    { name: settingsData.settings.theme }
+                  )
+                );
+                map!.setMapTypeId(settingsData.settings.theme);
+              }}
+            >
+              {loading || error
                 ? null
-                : data.nodes.map((node: any) => (
+                : nodesData.nodes.map((node: any) => (
                     <Marker
                       key={node.id}
                       position={{
@@ -41,10 +41,10 @@ const MapView: React.FC<IProps> = props => (
                         lng: node.pose.position.lon
                       }}
                     />
-                  ))
-            }
-          </Query>
-        </Map>
+                  ))}
+            </Map>
+          )}
+        </Query>
       )
     }
   </Query>

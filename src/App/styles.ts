@@ -60,7 +60,7 @@ export const ContentPane = styled(Card)`
     right: 0;
     width: 30%;
     height: fit-content;
-    max-height: 100%;
+    max-height: calc(100% - 48px);
     margin: 24px;
     background-color: rgba(255, 255, 255, 0.95);
   }
