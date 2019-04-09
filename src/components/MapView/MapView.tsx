@@ -14,14 +14,17 @@ const MapView: React.FC<IProps> = props => (
   <Query query={settingsQuery}>
     {({ loading, data: settingsData }) =>
       loading ? null : (
-        <Query query={detailsViewQuery /* TODO: implement mapViewQuery */} pollInterval={500}>
+        <Query
+          query={detailsViewQuery /* TODO: implement mapViewQuery */}
+          pollInterval={500}
+        >
           {({ loading, error, data: nodesData }) => {
             mapView && mapView.setMapTypeId(settingsData.settings.theme);
             return (
               <Map
                 google={props.google}
-                initialCenter={{ lat: 34.2159, lng: -83.9513 }}
-                zoom={16}
+                initialCenter={{ lat: 34.2169, lng: -83.9513 }}
+                zoom={17}
                 disableDefaultUI
                 backgroundColor={"transparent"}
                 onReady={(mapProps, map) => {
@@ -39,14 +42,22 @@ const MapView: React.FC<IProps> = props => (
                 {loading || error
                   ? null
                   : nodesData.nodes.map((node: any) => (
-                      <Marker
-                        key={node.id}
-                        position={{
-                          lat: node.pose.position.lat,
-                          lng: node.pose.position.lon
-                        }}
-                      />
-                    ))}
+                    <Marker
+                      key={node.id}
+                      position={{
+                        lat: node.pose.position.lat,
+                        lng: node.pose.position.lon
+                      }}
+                      icon={{
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        scale: 6,
+                        fillColor: "red",
+                        fillOpacity: 0.8,
+                        strokeWeight: 1,
+                        rotation: node.pose.orientation.heading
+                      }}
+                    />
+                  ))}
               </Map>
             );
           }}
