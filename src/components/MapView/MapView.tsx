@@ -48,7 +48,13 @@ const MapView: React.FC<IProps> = props => (
                         lat: node.pose.position.lat,
                         lng: node.pose.position.lon
                       }}
-                      icon={{
+                      icon={node.type == "BASE" ? {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 6,
+                        fillColor: "green",
+                        fillOpacity: 0.8,
+                        strokeWeight: 1
+                      } : {
                         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                         scale: 6,
                         fillColor: "red",
