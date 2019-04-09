@@ -6,7 +6,7 @@ import { detailsViewQuery } from "./queries";
 import { PanelHeader, StyledCollapse } from "./styles";
 
 const DetailsView: React.FC = () => (
-  <Query query={detailsViewQuery} partialRefetch>
+  <Query query={detailsViewQuery} pollInterval={500} partialRefetch>
     {({ loading, error, data }) => {
       if (loading) return <Skeleton active />;
       if (error)
