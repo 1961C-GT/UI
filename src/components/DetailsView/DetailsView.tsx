@@ -45,6 +45,12 @@ const DetailsView: React.FC = () => (
                   </p>
                 </div>
               )}
+              <p>
+                Temp: {node.telemetry.temp}ºC
+              </p>
+              <p>
+                Battery: {node.telemetry.batt}%
+              </p>
             </Collapse.Panel>
           ))}
         </StyledCollapse>

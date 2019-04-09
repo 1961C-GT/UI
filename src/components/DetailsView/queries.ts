@@ -18,6 +18,8 @@ export const detailsViewQuery = gql`
       }
       telemetry {
         groundSpeed
+        temp
+        batt
       }
     }
   }
