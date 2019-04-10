@@ -2,6 +2,7 @@ import * as React from "react";
 import { Query } from "react-apollo";
 import { Alert, Collapse, Skeleton } from "antd";
 
+import { BatteryIcon } from "components/BatteryIcon";
 import { detailsViewQuery } from "./queries";
 import { PanelHeader, StyledCollapse } from "./styles";
 
@@ -25,7 +26,9 @@ const DetailsView: React.FC = () => (
               header={
                 <PanelHeader>
                   <div>{node.name}</div>
-                  <div>{node.type}</div>
+                  <div>
+                    <BatteryIcon percentage={node.telemetry.batt} />
+                  </div>
                 </PanelHeader>
               }
               key={node.id}
@@ -45,12 +48,8 @@ const DetailsView: React.FC = () => (
                   </p>
                 </div>
               )}
-              <p>
-                Temp: {node.telemetry.temp}ºC
-              </p>
-              <p>
-                Battery: {node.telemetry.batt}%
-              </p>
+              <p>Temp: {node.telemetry.temp}ºC</p>
+              <p>Battery: {node.telemetry.batt}%</p>
             </Collapse.Panel>
           ))}
         </StyledCollapse>
