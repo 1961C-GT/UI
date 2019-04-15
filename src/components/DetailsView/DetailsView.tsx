@@ -28,13 +28,13 @@ const DetailsView: React.FC = () => (
                   {node.name}
                   <BatteryIcon
                     percentage={node.telemetry.batt}
-                    showPercentage={data.settings.devMode}
+                    showPercentage={data.devMode}
                   />
                 </PanelHeader>
               }
               key={node.id}
             >
-              {data.settings.devMode && (
+              {data.devMode && (
                 <div>
                   <p>
                     {node.pose.position.lat}, {node.pose.position.lon}
@@ -48,7 +48,7 @@ const DetailsView: React.FC = () => (
                     {Number(node.pose.orientation.heading).toFixed(2)}º @{" "}
                     {Number(node.telemetry.groundSpeed).toFixed(2)} knots
                   </p>
-                  {data.settings.devMode && (
+                  {data.devMode && (
                     <p>Orientation source: {node.pose.orientation.source}</p>
                   )}
                 </div>

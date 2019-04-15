@@ -1,10 +1,8 @@
 import gql from "graphql-tag";
 
-export const settingsQuery = gql`
+export const themeQuery = gql`
   {
-    settings @client {
-      theme
-    }
+    theme @client
   }
 `;
 

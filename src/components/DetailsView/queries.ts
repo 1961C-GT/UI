@@ -2,9 +2,7 @@ import gql from "graphql-tag";
 
 export const detailsViewQuery = gql`
   query {
-    settings @client {
-      devMode
-    }
+    devMode @client
     nodes {
       id
       type

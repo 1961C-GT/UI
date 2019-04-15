@@ -31,13 +31,9 @@ const SettingsView: React.FC<IProps> = props => (
                 </SettingsDescription>
               </div>
               <Select
-                defaultValue={data.settings.theme}
+                defaultValue={data.theme}
                 style={{ width: "128px" }}
-                onSelect={theme =>
-                  client.writeData({
-                    data: { settings: { __typename: "Settings", theme } }
-                  })
-                }
+                onSelect={theme => client.writeData({ data: { theme } })}
               >
                 {Object.keys(Themes).map(theme => (
                   <Select.Option key={theme} value={theme}>
@@ -50,20 +46,15 @@ const SettingsView: React.FC<IProps> = props => (
               <div>
                 <SettingsLabel>Developer mode</SettingsLabel>
                 <SettingsDescription>
-                  {data.settings.devMode
+                  {data.devMode
                     ? "Welcome, ninja sensei!"
                     : "Locked. Reach Level 3 or higher to unlock."}
                 </SettingsDescription>
               </div>
               <Switch
-                disabled={!data.settings.devMode}
-                checked={data.settings.devMode}
-                onChange={devMode => {
-                  console.log(devMode);
-                  client.writeData({
-                    data: { settings: { __typename: "Settings", devMode } }
-                  });
-                }}
+                disabled={!data.devMode}
+                checked={data.devMode}
+                onChange={devMode => client.writeData({ data: { devMode } })}
               />
             </SettingsItem>
           </div>

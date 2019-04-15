@@ -5,13 +5,13 @@ import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import Themes from "App/themes";
 import { detailsViewQuery } from "components/DetailsView/queries";
 
-import { settingsQuery } from "./queries";
+import { themeQuery } from "./queries";
 import { IProps } from "./types";
 
 let mapView: google.maps.Map;
 
 const MapView: React.FC<IProps> = props => (
-  <Query query={settingsQuery}>
+  <Query query={themeQuery}>
     {({ loading, data: settingsData }) =>
       loading ? null : (
         <Query
@@ -21,9 +21,9 @@ const MapView: React.FC<IProps> = props => (
           {({ loading, error, data: nodesData }) => {
             mapView &&
               mapView.setMapTypeId(
-                settingsData.settings.theme == "Satellite"
+                settingsData.theme == "Satellite"
                   ? "satellite"
-                  : settingsData.settings.theme
+                  : settingsData.theme
               );
             return (
               <Map
