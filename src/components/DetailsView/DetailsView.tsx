@@ -26,9 +26,10 @@ const DetailsView: React.FC = () => (
               header={
                 <PanelHeader>
                   <div>{node.name}</div>
-                  <div>
-                    <BatteryIcon percentage={node.telemetry.batt} />
-                  </div>
+                  <BatteryIcon
+                    percentage={node.telemetry.batt}
+                    showPercentage={data.settings.devMode}
+                  />
                 </PanelHeader>
               }
               key={node.id}

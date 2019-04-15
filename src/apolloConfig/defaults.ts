@@ -4,6 +4,6 @@ export default {
   settings: {
     __typename: "Settings",
     theme: ThemeType.STANDARD,
-    showAllNodes: true
+    devMode: true
   }
 };

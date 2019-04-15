@@ -3,7 +3,6 @@ import { Query } from "react-apollo";
 import { Select, Switch } from "antd";
 
 import Themes from "App/themes";
-import { ThemeType } from "App/types";
 
 import { settingsQuery } from "./queries";
 import {
@@ -20,42 +19,57 @@ const SettingsView: React.FC<IProps> = props => (
     onClose={props.onSettingsClose}
     visible={props.settingsOpen}
   >
-    <SettingsItem>
-      <div>
-        <SettingsLabel>Theme</SettingsLabel>
-        <SettingsDescription>Changes the look of the app.</SettingsDescription>
-      </div>
-      <Query query={settingsQuery}>
-        {({ loading, data, client }) =>
-          loading ? null : (
-            <Select
-              defaultValue={data.settings.theme}
-              style={{ width: "128px" }}
-              onSelect={theme =>
-                client.writeData({
-                  data: { settings: { __typename: "Settings", theme } }
-                })
-              }
-            >
-              {Object.keys(Themes).map(theme => (
-                <Select.Option key={theme} value={theme}>
-                  {theme}
-                </Select.Option>
-              ))}
-            </Select>
-          )
-        }
-      </Query>
-    </SettingsItem>
-    <SettingsItem>
-      <div>
-        <SettingsLabel>Show all nodes</SettingsLabel>
-        <SettingsDescription>
-          Displays base/fixed nodes on the map.
-        </SettingsDescription>
-      </div>
-      <Switch defaultChecked />
-    </SettingsItem>
+    <Query query={settingsQuery}>
+      {({ loading, data, client }) =>
+        loading ? null : (
+          <div>
+            <SettingsItem>
+              <div>
+                <SettingsLabel>Theme</SettingsLabel>
+                <SettingsDescription>
+                  Changes the look of the app.
+                </SettingsDescription>
+              </div>
+              <Select
+                defaultValue={data.settings.theme}
+                style={{ width: "128px" }}
+                onSelect={theme =>
+                  client.writeData({
+                    data: { settings: { __typename: "Settings", theme } }
+                  })
+                }
+              >
+                {Object.keys(Themes).map(theme => (
+                  <Select.Option key={theme} value={theme}>
+                    {theme}
+                  </Select.Option>
+                ))}
+              </Select>
+            </SettingsItem>
+            <SettingsItem>
+              <div>
+                <SettingsLabel>Developer mode</SettingsLabel>
+                <SettingsDescription>
+                  {data.settings.devMode
+                    ? "Welcome, ninja sensei!"
+                    : "Locked. Reach Level 3 or higher to unlock."}
+                </SettingsDescription>
+              </div>
+              <Switch
+                disabled={!data.settings.devMode}
+                checked={data.settings.devMode}
+                onChange={devMode => {
+                  console.log(devMode);
+                  client.writeData({
+                    data: { settings: { __typename: "Settings", devMode } }
+                  });
+                }}
+              />
+            </SettingsItem>
+          </div>
+        )
+      }
+    </Query>
   </ResponsiveDrawer>
 );
 

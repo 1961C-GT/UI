@@ -4,6 +4,7 @@ export const settingsQuery = gql`
   {
     settings @client {
       theme
+      devMode
     }
   }
 `;
