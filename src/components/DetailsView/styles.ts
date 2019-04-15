@@ -7,6 +7,7 @@ export const StyledCollapse = styled(Collapse)`
 
 export const PanelHeader = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-right: 10px;
 `;

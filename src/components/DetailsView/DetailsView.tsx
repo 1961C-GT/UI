@@ -25,7 +25,7 @@ const DetailsView: React.FC = () => (
             <Collapse.Panel
               header={
                 <PanelHeader>
-                  <div>{node.name}</div>
+                  {node.name}
                   <BatteryIcon
                     percentage={node.telemetry.batt}
                     showPercentage={data.settings.devMode}
@@ -34,23 +34,25 @@ const DetailsView: React.FC = () => (
               }
               key={node.id}
             >
-              <p>
-                Location: ({node.pose.position.lat}, {node.pose.position.lon})
-              </p>
+              {data.settings.devMode && (
+                <div>
+                  <p>
+                    {node.pose.position.lat}, {node.pose.position.lon}
+                  </p>
+                  <p>Temp: {node.telemetry.temp}ºC</p>
+                </div>
+              )}
               {node.type === "MOBILE" && (
                 <div>
                   <p>
-                    Orientation:{" "}
-                    {Number(node.pose.orientation.heading).toFixed(2)}º (source:{" "}
-                    {node.pose.orientation.source})
+                    {Number(node.pose.orientation.heading).toFixed(2)}º @{" "}
+                    {Number(node.telemetry.groundSpeed).toFixed(2)} knots
                   </p>
-                  <p>
-                    Speed: {Number(node.telemetry.groundSpeed).toFixed(2)} knots
-                  </p>
+                  {data.settings.devMode && (
+                    <p>Orientation source: {node.pose.orientation.source}</p>
+                  )}
                 </div>
               )}
-              <p>Temp: {node.telemetry.temp}ºC</p>
-              <p>Battery: {node.telemetry.batt}%</p>
             </Collapse.Panel>
           ))}
         </StyledCollapse>

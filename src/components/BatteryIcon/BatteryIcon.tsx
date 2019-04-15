@@ -45,46 +45,44 @@ export const BatteryIcon: React.FC<Props> = props => {
   showPercentage = showPercentage && percentage < 100;
 
   return (
-    <div>
-      <svg width={38} height={30} viewBox="0 0 1316 1024">
-        <defs>
-          <clipPath id={`battery-${percentage}`}>
-            {getBatteryPath(percentage)}
-          </clipPath>
-        </defs>
-        {showPercentage && (
-          <text
-            x={650}
-            y={650}
-            fill={getBatteryColor(percentage)}
-            fontSize={400}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            {percentage}
-          </text>
-        )}
-        <rect
-          width={1316}
-          height={1024}
+    <svg width={38} height={30} viewBox="0 0 1316 1024">
+      <defs>
+        <clipPath id={`battery-${percentage}`}>
+          {getBatteryPath(percentage)}
+        </clipPath>
+      </defs>
+      {showPercentage && (
+        <text
+          x={650}
+          y={650}
           fill={getBatteryColor(percentage)}
+          fontSize={400}
+          fontWeight={600}
+          textAnchor="middle"
+        >
+          {percentage}
+        </text>
+      )}
+      <rect
+        width={1316}
+        height={1024}
+        fill={getBatteryColor(percentage)}
+        clipPath={`url(#battery-${percentage})`}
+      />
+      {showPercentage && (
+        <text
+          x={650}
+          y={650}
+          fill="white"
+          fontSize={400}
+          fontWeight={600}
+          textAnchor="middle"
           clipPath={`url(#battery-${percentage})`}
-        />
-        {showPercentage && (
-          <text
-            x={650}
-            y={650}
-            fill="white"
-            fontSize={400}
-            fontWeight={600}
-            textAnchor="middle"
-            clipPath={`url(#battery-${percentage})`}
-          >
-            {percentage}
-          </text>
-        )}
-      </svg>
-    </div>
+        >
+          {percentage}
+        </text>
+      )}
+    </svg>
   );
 };
 
