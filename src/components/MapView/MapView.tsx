@@ -1,6 +1,11 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import {
+  GoogleApiWrapper,
+  Map,
+  Marker,
+  markerEventHandler
+} from "google-maps-react";
 
 import Themes from "App/themes";
 import { detailsViewQuery } from "components/DetailsView/queries";
@@ -53,14 +58,13 @@ const MapView: React.FC<IProps> = props => (
                           lat: node.pose.position.lat,
                           lng: node.pose.position.lon
                         }}
-                        title={node.name}
                         icon={
                           node.type == "BASE"
                             ? {
                                 path: google.maps.SymbolPath.CIRCLE,
-                                scale: 6,
+                                scale: 7,
                                 fillColor: "green",
-                                fillOpacity: 0.8,
+                                fillOpacity: 0.75,
                                 strokeWeight: 1
                               }
                             : {
@@ -68,11 +72,17 @@ const MapView: React.FC<IProps> = props => (
                                   google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                                 scale: 6,
                                 fillColor: "red",
-                                fillOpacity: 0.8,
+                                fillOpacity: 0.75,
                                 strokeWeight: 1,
                                 rotation: node.pose.orientation.heading
                               }
                         }
+                        label={
+                          node.type == "BASE" ? node.name.split(" ")[1] : ""
+                        }
+                        title={node.name}
+                        draggable={node.type == "BASE"}
+                        onDragend={evt => console.log(evt)}
                         onClick={() => console.log("Clicked", node)}
                       />
                     ))}
