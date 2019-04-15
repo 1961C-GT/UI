@@ -42,28 +42,35 @@ const MapView: React.FC<IProps> = props => (
                 {loading || error
                   ? null
                   : nodesData.nodes.map((node: any) => (
-                    <Marker
-                      key={node.id}
-                      position={{
-                        lat: node.pose.position.lat,
-                        lng: node.pose.position.lon
-                      }}
-                      icon={node.type == "BASE" ? {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 6,
-                        fillColor: "green",
-                        fillOpacity: 0.8,
-                        strokeWeight: 1
-                      } : {
-                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                        scale: 6,
-                        fillColor: "red",
-                        fillOpacity: 0.8,
-                        strokeWeight: 1,
-                        rotation: node.pose.orientation.heading
-                      }}
-                    />
-                  ))}
+                      <Marker
+                        key={node.id}
+                        position={{
+                          lat: node.pose.position.lat,
+                          lng: node.pose.position.lon
+                        }}
+                        title={node.name}
+                        icon={
+                          node.type == "BASE"
+                            ? {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 6,
+                                fillColor: "green",
+                                fillOpacity: 0.8,
+                                strokeWeight: 1
+                              }
+                            : {
+                                path:
+                                  google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                scale: 6,
+                                fillColor: "red",
+                                fillOpacity: 0.8,
+                                strokeWeight: 1,
+                                rotation: node.pose.orientation.heading
+                              }
+                        }
+                        onClick={() => console.log("Clicked", node)}
+                      />
+                    ))}
               </Map>
             );
           }}
