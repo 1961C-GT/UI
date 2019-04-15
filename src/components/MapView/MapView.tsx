@@ -1,11 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
-import {
-  GoogleApiWrapper,
-  Map,
-  Marker,
-  markerEventHandler
-} from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
 import Themes from "App/themes";
 import { detailsViewQuery } from "components/DetailsView/queries";
@@ -82,7 +77,9 @@ const MapView: React.FC<IProps> = props => (
                         }
                         title={node.name}
                         draggable={node.type == "BASE"}
-                        onDragend={evt => console.log(evt)}
+                        onDragend={(p, m, e) =>
+                          console.log(e.latLng.lat(), e.latLng.lng())
+                        }
                         onClick={() => console.log("Clicked", node)}
                       />
                     ))}
