@@ -19,7 +19,12 @@ const MapView: React.FC<IProps> = props => (
           pollInterval={500}
         >
           {({ loading, error, data: nodesData }) => {
-            mapView && mapView.setMapTypeId(settingsData.settings.theme);
+            mapView &&
+              mapView.setMapTypeId(
+                settingsData.settings.theme == "Satellite"
+                  ? "satellite"
+                  : settingsData.settings.theme
+              );
             return (
               <Map
                 google={props.google}

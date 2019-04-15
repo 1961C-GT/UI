@@ -6,6 +6,7 @@ export interface IState {
 
 export enum ThemeType {
   STANDARD = "Standard",
+  SATELLITE = "Satellite",
   SILVER = "Silver",
   RETRO = "Retro",
   DARK = "Dark",

@@ -962,6 +962,10 @@ let Themes: IThemes = {
     appStyles: { background: "#aad9fd" },
     mapStyles: MapStylesStandard
   },
+  [ThemeType.SATELLITE]: {
+    appStyles: { background: "#aad9fd" },
+    mapStyles: MapStylesStandard
+  },
   [ThemeType.SILVER]: {
     appStyles: {},
     mapStyles: MapStylesSilver
