@@ -19,7 +19,7 @@ const MapView: React.FC<IProps> = props => (
       return (
         <Map
           google={props.google}
-          initialCenter={{ lat: 33.7862316, lng: -84.3759834 }}
+          initialCenter={{ lat: 33.7837022, lng: -84.3729165 }}
           zoom={18}
           disableDefaultUI
           zoomControl
