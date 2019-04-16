@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const detailsViewQuery = gql`
   query {
     devMode @client
+    expandedDetails @client
     nodes {
       id
       type

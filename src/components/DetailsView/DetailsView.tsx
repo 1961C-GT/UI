@@ -7,8 +7,8 @@ import { detailsViewQuery } from "./queries";
 import { PanelHeader, StyledCollapse } from "./styles";
 
 const DetailsView: React.FC = () => (
-  <Query query={detailsViewQuery} pollInterval={500} partialRefetch>
-    {({ loading, error, data }) => {
+  <Query query={detailsViewQuery} partialRefetch>
+    {({ loading, error, data, client }) => {
       if (loading) return <Skeleton active />;
       if (error)
         return (
@@ -20,7 +20,15 @@ const DetailsView: React.FC = () => (
           />
         );
       return (
-        <StyledCollapse bordered={false}>
+        <StyledCollapse
+          bordered={false}
+          activeKey={data.expandedDetails}
+          onChange={expandedDetails =>
+            client.writeData({
+              data: { expandedDetails }
+            })
+          }
+        >
           {data.nodes.map((node: any) => (
             <Collapse.Panel
               header={

@@ -3,21 +3,17 @@ import { Query } from "react-apollo";
 import { Circle, GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
 import Themes from "App/themes";
-import { detailsViewQuery } from "components/DetailsView/queries";
 
-import { settingsQuery } from "./queries";
+import { mapViewQuery, settingsQuery } from "./queries";
 import { IProps } from "./types";
 
 let mapView: google.maps.Map;
 
 const MapView: React.FC<IProps> = props => (
   <Query query={settingsQuery}>
-    {({ loading, data: settingsData }) =>
+    {({ loading, data: settingsData, client }) =>
       loading ? null : (
-        <Query
-          query={detailsViewQuery /* TODO: implement mapViewQuery */}
-          pollInterval={500}
-        >
+        <Query query={mapViewQuery} pollInterval={500}>
           {({ loading, error, data: nodesData }) => {
             mapView &&
               mapView.setMapTypeId(
@@ -123,7 +119,18 @@ const MapView: React.FC<IProps> = props => (
                                 e.latLng.lng()
                               )
                             }
-                            onClick={() => console.log("Clicked", node)}
+                            onClick={() => {
+                              const idx = settingsData.expandedDetails.findIndex(
+                                (i: string) => i === node.id
+                              );
+                              const expandedDetails =
+                                settingsData.expandedDetails;
+                              if (idx == -1) expandedDetails.push(node.id);
+                              else expandedDetails.splice(idx, 1);
+                              client.writeData({
+                                data: { expandedDetails }
+                              });
+                            }}
                           />
                         )
                     )}
