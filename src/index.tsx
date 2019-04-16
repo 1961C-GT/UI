@@ -7,7 +7,7 @@ import { ApolloProvider, Query } from "react-apollo";
 import { ThemeProvider } from "styled-components";
 
 import "./index.css";
-import apolloConfig from "./apolloConfig";
+import apolloConfig, { defaults } from "./apolloConfig";
 import App from "./App/index";
 import Themes from "./App/themes";
 import { themeQuery } from "App/queries";
@@ -15,6 +15,7 @@ import { themeQuery } from "App/queries";
 import * as serviceWorker from "./serviceWorker";
 
 const client = new ApolloClient(apolloConfig);
+client.writeData({ data: defaults });
 
 const MOUNT_NODE = document.getElementById("root") as Element;
 
