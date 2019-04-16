@@ -5,13 +5,13 @@ import { Circle, GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import Themes from "App/themes";
 import { detailsViewQuery } from "components/DetailsView/queries";
 
-import { themeQuery } from "./queries";
+import { settingsQuery } from "./queries";
 import { IProps } from "./types";
 
 let mapView: google.maps.Map;
 
 const MapView: React.FC<IProps> = props => (
-  <Query query={themeQuery}>
+  <Query query={settingsQuery}>
     {({ loading, data: settingsData }) =>
       loading ? null : (
         <Query
@@ -46,45 +46,49 @@ const MapView: React.FC<IProps> = props => (
               >
                 {loading || error
                   ? null
-                  : nodesData.nodes.map((node: any) => (
-                      <Marker
-                        key={`${node.id}-marker`}
-                        position={{
-                          lat: node.pose.position.lat,
-                          lng: node.pose.position.lon
-                        }}
-                        icon={
-                          node.type == "BASE"
-                            ? {
-                                path: google.maps.SymbolPath.CIRCLE,
-                                scale: 7,
-                                fillColor: "green",
-                                fillOpacity: 0.5,
-                                strokeColor: "darkgreen",
-                                strokeWeight: 1
-                              }
-                            : {
-                                path:
-                                  google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                                scale: 6,
-                                fillColor: "red",
-                                fillOpacity: 0.5,
-                                strokeColor: "darkred",
-                                strokeWeight: 1,
-                                anchor: new google.maps.Point(0, 2.5),
-                                labelOrigin: new google.maps.Point(0, 2.5),
-                                rotation: node.pose.orientation.heading
-                              }
-                        }
-                        label={node.name.split(" ")[1]}
-                        title={node.name}
-                        draggable={node.type == "BASE"}
-                        onDragend={(p, m, e) =>
-                          console.log(e.latLng.lat(), e.latLng.lng())
-                        }
-                        onClick={() => console.log("Clicked", node)}
-                      />
-                    ))}
+                  : nodesData.nodes.map(
+                      (node: any) =>
+                        (settingsData.devMode || node.type == "MOBILE") && (
+                          <Marker
+                            key={`${node.id}-marker`}
+                            position={{
+                              lat: node.pose.position.lat,
+                              lng: node.pose.position.lon
+                            }}
+                            icon={
+                              node.type == "BASE"
+                                ? {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 7,
+                                    fillColor: "green",
+                                    fillOpacity: 0.5,
+                                    strokeColor: "darkgreen",
+                                    strokeWeight: 1
+                                  }
+                                : {
+                                    path:
+                                      google.maps.SymbolPath
+                                        .FORWARD_CLOSED_ARROW,
+                                    scale: 6,
+                                    fillColor: "red",
+                                    fillOpacity: 0.5,
+                                    strokeColor: "darkred",
+                                    strokeWeight: 1,
+                                    anchor: new google.maps.Point(0, 2.5),
+                                    labelOrigin: new google.maps.Point(0, 2.5),
+                                    rotation: node.pose.orientation.heading
+                                  }
+                            }
+                            label={node.name.split(" ")[1]}
+                            title={node.name}
+                            draggable={node.type == "BASE"}
+                            onDragend={(p, m, e) =>
+                              console.log(e.latLng.lat(), e.latLng.lng())
+                            }
+                            onClick={() => console.log("Clicked", node)}
+                          />
+                        )
+                    )}
                 {loading || error
                   ? null
                   : nodesData.nodes.map(
