@@ -1,6 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import { Circle, GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
 import Themes from "App/themes";
 import { detailsViewQuery } from "components/DetailsView/queries";
@@ -48,7 +48,7 @@ const MapView: React.FC<IProps> = props => (
                   ? null
                   : nodesData.nodes.map((node: any) => (
                       <Marker
-                        key={node.id}
+                        key={`${node.id}-marker`}
                         position={{
                           lat: node.pose.position.lat,
                           lng: node.pose.position.lon
@@ -59,7 +59,8 @@ const MapView: React.FC<IProps> = props => (
                                 path: google.maps.SymbolPath.CIRCLE,
                                 scale: 7,
                                 fillColor: "green",
-                                fillOpacity: 0.75,
+                                fillOpacity: 0.5,
+                                strokeColor: "darkgreen",
                                 strokeWeight: 1
                               }
                             : {
@@ -67,14 +68,15 @@ const MapView: React.FC<IProps> = props => (
                                   google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                                 scale: 6,
                                 fillColor: "red",
-                                fillOpacity: 0.75,
+                                fillOpacity: 0.5,
+                                strokeColor: "darkred",
                                 strokeWeight: 1,
+                                anchor: new google.maps.Point(0, 2.5),
+                                labelOrigin: new google.maps.Point(0, 2.5),
                                 rotation: node.pose.orientation.heading
                               }
                         }
-                        label={
-                          node.type == "BASE" ? node.name.split(" ")[1] : ""
-                        }
+                        label={node.name.split(" ")[1]}
                         title={node.name}
                         draggable={node.type == "BASE"}
                         onDragend={(p, m, e) =>
@@ -83,6 +85,24 @@ const MapView: React.FC<IProps> = props => (
                         onClick={() => console.log("Clicked", node)}
                       />
                     ))}
+                {loading || error
+                  ? null
+                  : nodesData.nodes.map(
+                      (node: any) =>
+                        node.type == "MOBILE" && (
+                          <Circle
+                            key={`${node.id}-circle`}
+                            center={{
+                              lat: node.pose.position.lat,
+                              lng: node.pose.position.lon
+                            }}
+                            radius={12} /* TODO: Replace with actual accuracy */
+                            strokeColor={"darkblue"}
+                            strokeWeight={0}
+                            fillColor={"blue"}
+                          />
+                        )
+                    )}
               </Map>
             );
           }}
