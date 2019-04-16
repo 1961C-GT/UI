@@ -13,12 +13,13 @@ const DetailsView: React.FC = () => (
       if (error)
         return (
           <Alert
-            message="Error"
-            description="Could not fetch node details."
+            message="Could not fetch node details."
             type="error"
             showIcon
           />
         );
+      if (!data.nodes || data.nodes.length === 0)
+        return <Alert message="No nodes found." type="info" showIcon />;
       return (
         <StyledCollapse
           bordered={false}
@@ -29,40 +30,47 @@ const DetailsView: React.FC = () => (
             })
           }
         >
-          {data.nodes.map((node: any) => (
-            <Collapse.Panel
-              header={
-                <PanelHeader>
-                  {node.name}
-                  <BatteryIcon
-                    percentage={node.telemetry.batt}
-                    showPercentage={data.devMode}
-                  />
-                </PanelHeader>
-              }
-              key={node.id}
-            >
-              {data.devMode && (
-                <div>
-                  <p>
-                    {node.pose.position.lat}, {node.pose.position.lon}
-                  </p>
-                  <p>Temp: {node.telemetry.temp}ºC</p>
-                </div>
-              )}
-              {node.type === "MOBILE" && (
-                <div>
-                  <p>
-                    {Number(node.pose.orientation.heading).toFixed(2)}º @{" "}
-                    {Number(node.telemetry.groundSpeed).toFixed(2)} knots
-                  </p>
+          {data.nodes.map(
+            (node: any) =>
+              (data.devMode || node.type == "MOBILE") && (
+                <Collapse.Panel
+                  header={
+                    <PanelHeader>
+                      {node.name}
+                      <BatteryIcon
+                        percentage={node.telemetry.batt}
+                        showPercentage={data.devMode}
+                      />
+                    </PanelHeader>
+                  }
+                  key={node.id}
+                >
                   {data.devMode && (
-                    <p>Orientation source: {node.pose.orientation.source}</p>
+                    <div>
+                      <p>
+                        Location: {node.pose.position.lat},{" "}
+                        {node.pose.position.lon} ± {node.pose.position.accuracy}
+                        m
+                      </p>
+                      <p>DW1000 temp: {node.telemetry.temp}ºC</p>
+                    </div>
                   )}
-                </div>
-              )}
-            </Collapse.Panel>
-          ))}
+                  {node.type === "MOBILE" && (
+                    <div>
+                      <p>
+                        {Number(node.pose.orientation.heading).toFixed(2)}º @{" "}
+                        {Number(node.telemetry.groundSpeed).toFixed(2)} knots
+                      </p>
+                      {data.devMode && (
+                        <p>
+                          Orientation source: {node.pose.orientation.source}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </Collapse.Panel>
+              )
+          )}
         </StyledCollapse>
       );
     }}
