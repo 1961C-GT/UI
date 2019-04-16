@@ -1,9 +1,14 @@
 import gql from "graphql-tag";
 
-export const detailsViewQuery = gql`
-  query {
+export const settingsQuery = gql`
+  {
     devMode @client
     expandedDetails @client
+  }
+`;
+
+export const nodesQuery = gql`
+  query {
     nodes {
       id
       type

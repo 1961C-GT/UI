@@ -1,15 +1,15 @@
 import gql from "graphql-tag";
 
-export const settingsQuery = gql`
-  {
-    theme @client
-    devMode @client
-    expandedDetails @client
-  }
-`;
+// export const settingsQuery = gql`
+//   {
+//   }
+// `;
 
 export const mapViewQuery = gql`
   query {
+    theme @client
+    devMode @client
+    expandedDetails @client
     nodes {
       id
       name
