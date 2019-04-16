@@ -60,7 +60,7 @@ const MapView: React.FC<IProps> = props => (
                             radius={
                               node.pose.position.accuracy == -1
                                 ? 25
-                                : node.pose.position.accuracy
+                                : node.pose.position.accuracy / 1000
                             }
                             strokeColor={
                               node.pose.position.accuracy == -1
