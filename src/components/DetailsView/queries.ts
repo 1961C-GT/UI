@@ -11,6 +11,7 @@ export const detailsViewQuery = gql`
         position {
           lat
           lon
+          accuracy
         }
         orientation {
           heading

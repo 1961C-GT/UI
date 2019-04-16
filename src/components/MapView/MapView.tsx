@@ -31,6 +31,8 @@ const MapView: React.FC<IProps> = props => (
                 initialCenter={{ lat: 34.2169, lng: -83.9513 }}
                 zoom={17}
                 disableDefaultUI
+                zoomControl
+                rotateControl
                 backgroundColor={"transparent"}
                 onReady={(mapProps, map) => {
                   Object.entries(Themes).forEach(([name, { mapStyles }]) =>
@@ -44,6 +46,34 @@ const MapView: React.FC<IProps> = props => (
                   mapView = map!;
                 }}
               >
+                {loading || error
+                  ? null
+                  : nodesData.nodes.map(
+                      (node: any) =>
+                        node.type == "MOBILE" && (
+                          <Circle
+                            key={`${node.id}-circle`}
+                            center={{
+                              lat: node.pose.position.lat,
+                              lng: node.pose.position.lon
+                            }}
+                            radius={
+                              node.pose.position.accuracy == -1
+                                ? 25
+                                : node.pose.position.accuracy
+                            }
+                            strokeColor={
+                              node.pose.position.accuracy == -1
+                                ? "darkred"
+                                : "darkblue"
+                            }
+                            strokeWeight={0.5}
+                            fillColor={
+                              node.pose.position.accuracy == -1 ? "red" : "blue"
+                            }
+                          />
+                        )
+                    )}
                 {loading || error
                   ? null
                   : nodesData.nodes.map(
@@ -76,34 +106,24 @@ const MapView: React.FC<IProps> = props => (
                                     strokeWeight: 1,
                                     anchor: new google.maps.Point(0, 2.5),
                                     labelOrigin: new google.maps.Point(0, 2.5),
-                                    rotation: node.pose.orientation.heading
+                                    rotation:
+                                      node.pose.orientation.heading -
+                                      (mapView && mapView.getHeading())
                                   }
                             }
                             label={node.name.split(" ")[1]}
                             title={node.name}
                             draggable={node.type == "BASE"}
                             onDragend={(p, m, e) =>
-                              console.log(e.latLng.lat(), e.latLng.lng())
+                              console.log(
+                                "Dragged",
+                                node,
+                                "to",
+                                e.latLng.lat(),
+                                e.latLng.lng()
+                              )
                             }
                             onClick={() => console.log("Clicked", node)}
-                          />
-                        )
-                    )}
-                {loading || error
-                  ? null
-                  : nodesData.nodes.map(
-                      (node: any) =>
-                        node.type == "MOBILE" && (
-                          <Circle
-                            key={`${node.id}-circle`}
-                            center={{
-                              lat: node.pose.position.lat,
-                              lng: node.pose.position.lon
-                            }}
-                            radius={12} /* TODO: Replace with actual accuracy */
-                            strokeColor={"darkblue"}
-                            strokeWeight={0}
-                            fillColor={"blue"}
                           />
                         )
                     )}
